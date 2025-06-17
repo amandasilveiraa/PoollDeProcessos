@@ -1,5 +1,5 @@
 #pragma once
-#include "process.h"
+#include "Process.h"
 #include <sstream>
 #include <iostream>
 
@@ -10,7 +10,7 @@ class ComputingProcess : public Process {
         string getType() override;
         string toString() override;
     private:
-        string expr;
+        string expressao;
         float op1, op2;
-        char oper;
+        char operacao;
 };
