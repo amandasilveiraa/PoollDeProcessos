@@ -1,13 +1,16 @@
 #pragma once
-#include "Process.h"
-class Fila;
 
-class PrintingProcess : public Process {
-private:
-    Fila* fila;
-public:
-    PrintingProcess(Fila* f);
+#include "Process.h"
+#include <list>
+
+class PrintingProcess : public Process{
+    private:
+    std::list<Process*>& processos;
+
+    public:
+    PrintingProcess(std::list<Process*>& lista);
     void execute() override;
-    string getType() override;
-    string toString() override;
+    std::string getType() override;
+    std::string toString() override;
 };
+

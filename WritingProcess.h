@@ -1,14 +1,16 @@
 #pragma once
-#include "Process.h"
 #include <fstream>
-#include <iostream>
+#include <ostream>
+#include "Process.h"
+#include <ComputingProcess.h>
 
-class WritingProcess : public Process {
-private:
-    string expressao;
-public:
-    WritingProcess(string expressao);
+class WritingProcess : public Process{
+    private:
+    ComputingProcess* comp;
+
+    public:
+    WritingProcess(ComputingProcess* cp);
     void execute() override;
-    string getType() override;
-    string toString() override;
+    std::string getType() override;
+    std::string toString() override;
 };

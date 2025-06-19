@@ -1,23 +1,22 @@
 #include "WritingProcess.h"
 
-WritingProcess::WritingProcess(string expressao) {
-    expressao = expressao;
-}
+WritingProcess::WritingProcess(ComputingProcess* cp) : comp(cp){}
 
-void WritingProcess::execute() {
-    ofstream arquivo("computation.txt", ios::app);
-    if (arquivo.is_open()) {
-        arquivo << expressao << endl;
-        arquivo.close();
-        cout << "PID " << pid << ": Expressao gravada" << endl;
+void WritingProcess::execute(){
+    std::ofstream file("Computation.txt", std::ios::app); // abre em modo append
+    if (file.is_open()){
+        file << comp->toString() << "\n";
+        std::cout << "PID " << pid << ": Expressao" << comp->toString() << "gravada com sucesso\n";
+        file.close();
     } else {
-        cout << "Erro ao abrir o arquivo" << endl;
+        std::cout <<"Erro ao abrir arquivo para gravação. \n";
     }
 }
 
-string WritingProcess::getType() { 
-    return "WritingProcess"; 
+std::string WritingProcess::getType() {
+    return "WritingProcess";
 }
-string WritingProcess::toString() { 
-    return expressao;
+
+std::string WritingProcess::toString() {
+    return "Salvar expressão: " + comp->toString();
 }
