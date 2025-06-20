@@ -1,15 +1,26 @@
 #include "WritingProcess.h"
+#include "ComputingProcess.h"
+#include <iostream>
+#include <fstream>
 
-WritingProcess::WritingProcess(ComputingProcess* cp) : comp(cp){}
+WritingProcess::WritingProcess(ComputingProcess* cp) : comp(cp) {}
 
-void WritingProcess::execute(){
-    std::ofstream file("Computation.txt", std::ios::app); // abre em modo append
-    if (file.is_open()){
+WritingProcess::WritingProcess(std::string expressao) {
+    comp = new ComputingProcess(expressao);
+}
+
+WritingProcess::~WritingProcess() {
+    delete comp;
+}
+
+void WritingProcess::execute() {
+    std::ofstream file("Computation.txt", std::ios::app); // modo append
+    if (file.is_open()) {
         file << comp->toString() << "\n";
-        std::cout << "PID " << pid << ": Expressao" << comp->toString() << "gravada com sucesso\n";
+        std::cout << "PID " << pid << ": Expressao " << comp->toString() << " gravada com sucesso\n";
         file.close();
     } else {
-        std::cout <<"Erro ao abrir arquivo para gravação. \n";
+        std::cout << "Erro ao abrir arquivo para gravação.\n";
     }
 }
 
